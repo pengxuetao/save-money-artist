@@ -1,0 +1,6 @@
+logging:
+  level:
+    com.luffy.artist: debug
+
+swagger:
+  enabled: true
