@@ -1,5 +1,9 @@
 package com.luffy.artist.vo;
 
+/**
+ * 转换口令请求参数
+ * @author Peng xue-tao
+ */
 public class ConvertReq {
 
     private String oriString;

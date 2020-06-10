@@ -1,10 +1,19 @@
 package com.luffy.artist.controller;
 
+import com.luffy.artist.enums.ErrorCode;
 import com.luffy.artist.vo.ConvertReq;
+import com.luffy.artist.vo.ConvertResp;
+import com.luffy.artist.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +23,8 @@ import java.util.regex.Pattern;
 @RequestMapping("/taopassword")
 public class TaoPasswordController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaoPasswordController.class);
+
     /**
      * 转换口令
      * @param convertReq
@@ -22,7 +33,10 @@ public class TaoPasswordController {
     @ResponseBody
     @PostMapping("/convert")
     @ApiOperation(value = "转换口令")
-    public String convert(@RequestBody ConvertReq convertReq){
+    public Result<ConvertResp> convert(@RequestBody ConvertReq convertReq){
+        if(StringUtils.isEmpty(convertReq.getOriString()) || StringUtils.isEmpty(convertReq.getTargetString()) ) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
         String patternExpression;
         if(convertReq.getOriString().contains("(") && convertReq.getOriString().contains(")")) {
             patternExpression = "([\\p{Punct}])\\w{8,12}([\\p{Punct}])";
@@ -36,19 +50,21 @@ public class TaoPasswordController {
         Matcher matcher = pattern.matcher(content);
         Matcher matcher2 = pattern.matcher(content2);
         if(!matcher.find()) {
-            return "请输入正确的淘口令";
+            return new Result<>(ErrorCode.ERROR_90001.getCode(), ErrorCode.ERROR_90001.getErrorDesc());
         }
         if(!matcher2.find()) {
-            return "请输入正确的淘口令";
+            return new Result<>(ErrorCode.ERROR_90001.getCode(), ErrorCode.ERROR_90001.getErrorDesc());
         }
-        System.out.println("转换前--------------");
-        System.out.println(content);
-        System.out.println(content2);
+        LOGGER.info("转换前--------------");
+        LOGGER.info(content);
+        LOGGER.info(content2);
         String s = matcher.group();
         String s2 = matcher2.group();
-        System.out.println("转换后--------------");
-        System.out.println(content.replace(s ,s2));
-        return content.replace(s ,s2);
+        LOGGER.info("转换后--------------");
+        LOGGER.info(content.replace(s ,s2));
+        ConvertResp convertResp = new ConvertResp();
+        convertResp.setConvertResult(content.replace(s ,s2));
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), convertResp);
     }
 
 }

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.luffy</groupId>
     <artifactId>save-money-artist</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>save-money-artist</name>
     <description>save-money-artist project for Spring Boot</description>
 
