@@ -1,8 +1,10 @@
 package com.luffy.artist.controller.user;
 
 import com.luffy.artist.entity.SysDict;
+import com.luffy.artist.entity.UserSignature;
 import com.luffy.artist.enums.ErrorCode;
 import com.luffy.artist.service.SysDictService;
+import com.luffy.artist.service.UserSignatureService;
 import com.luffy.artist.vo.ConvertReq;
 import com.luffy.artist.vo.ConvertResp;
 import com.luffy.artist.vo.Result;
@@ -14,11 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +31,8 @@ public class SettingController {
 
     @Autowired
     private SysDictService sysDictService;
+    @Autowired
+    private UserSignatureService userSignatureService;
 
     /**
      * 设置签名开关
@@ -40,7 +42,7 @@ public class SettingController {
     @ResponseBody
     @PostMapping("/signatureSwitch")
     @ApiOperation(value = "设置签名开关")
-    public Result<SysDict> signatureSwitch(@RequestBody SignatureSwitchReq signatureSwitchReq){
+    public Result<SysDict> signatureSwitch(@RequestBody SignatureSwitchReq signatureSwitchReq) {
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         String signatureSwitch = signatureSwitchReq.getSignatureSwitchStatus();
         if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
@@ -67,7 +69,7 @@ public class SettingController {
     @ResponseBody
     @PostMapping("/querySignatureSwitch")
     @ApiOperation(value = "查询签名开关设置")
-    public Result<SysDict> querySignatureSwitch(){
+    public Result<SysDict> querySignatureSwitch() {
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
             return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
@@ -75,4 +77,81 @@ public class SettingController {
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), sysDict);
     }
 
+    /**
+     * 查询用户签名列表
+     * @return Result<List<UserSignature>>
+     */
+    @ResponseBody
+    @GetMapping("/queryUserSignatureList")
+    @ApiOperation(value = "查询用户签名列表")
+    public Result<List<UserSignature>> queryUserSignatureList() {
+        List<UserSignature> userSignatureList = userSignatureService.queryUserSignatureListByUserId("admin");
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), userSignatureList);
+    }
+
+    /**
+     * 查询用户签名
+     * @param id ID主键
+     * @return Result<UserSignature>
+     */
+    @ResponseBody
+    @GetMapping("/queryUserSignature")
+    @ApiOperation(value = "查询用户签名")
+    public Result<UserSignature> queryUserSignature(@RequestParam("id") Integer id) {
+        UserSignature userSignature = userSignatureService.queryUserSignatureById(id);
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), userSignature);
+    }
+
+    /**
+     * 增加用户签名
+     * @param userSignature 用户签名
+     * @return int
+     */
+    @ResponseBody
+    @PostMapping("/addUserSignature")
+    @ApiOperation(value = "增加用户签名")
+    public Result<Boolean> addUserSignature(@RequestBody UserSignature userSignature) {
+        userSignature.setUserId("admin");
+        userSignatureService.addUserSignature(userSignature);
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
+    }
+
+    /**
+     * 修改用户签名
+     * @param userSignature 用户签名
+     * @return int
+     */
+    @ResponseBody
+    @PostMapping("/modifyUserSignature")
+    @ApiOperation(value = "修改用户签名")
+    public Result<Boolean> modifyUserSignature(@RequestBody UserSignature userSignature) {
+        userSignatureService.modifyUserSignature(userSignature);
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
+    }
+
+    /**
+     * 删除用户签名
+     * @param id ID主键
+     * @return int
+     */
+    @ResponseBody
+    @PostMapping("/deleteUserSignature")
+    @ApiOperation(value = "删除用户签名")
+    public Result<Boolean> deleteUserSignature(@RequestParam("id") Integer id) {
+        userSignatureService.deleteUserSignature(id);
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
+    }
+
+    /**
+     * 设置默认用户签名
+     * @param id ID主键
+     * @return int
+     */
+    @ResponseBody
+    @PostMapping("/configDefaultUserSignature")
+    @ApiOperation(value = "设置默认用户签名")
+    public Result<Boolean> configDefaultUserSignature(@RequestParam("id") Integer id) {
+        userSignatureService.configDefaultUserSignature(id);
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
+    }
 }

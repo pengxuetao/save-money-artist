@@ -1,0 +1,25 @@
+CREATE TABLE `sys_dict` (
+  `id` int(5) NOT NULL AUTO_INCREMENT COMMENT 'ID主键',
+  `type_key` varchar(64) DEFAULT NULL COMMENT '类型键',
+  `type_desc` varchar(32) DEFAULT NULL COMMENT '类型描述',
+  `subtype_name` varchar(64) DEFAULT NULL COMMENT '子类型名称',
+  `subtype_value` varchar(32) DEFAULT NULL COMMENT '子类型值',
+  `sort` tinyint(2) DEFAULT NULL COMMENT '排序',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统字典配置表';
+
+INSERT INTO `artist`.`sys_dict`(`id`, `type_key`, `type_desc`, `subtype_name`, `subtype_value`, `sort`, `remark`, `update_date`, `create_date`) VALUES (1, 'signatureSwitch', '签名开关', '签名开关 0-关 1-开', '0', 1, NULL, '2020-06-12 12:00:07', '2020-06-12 12:00:11');
+
+CREATE TABLE `user_signature` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ID主键',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
+  `title` varchar(32) DEFAULT NULL COMMENT '标题',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `is_default` tinyint(1) DEFAULT NULL COMMENT '是否默认 0-否 1-是',
+  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户签名表';

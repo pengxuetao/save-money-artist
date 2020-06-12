@@ -1,6 +1,10 @@
 package com.luffy.artist.controller;
 
+import com.luffy.artist.entity.SysDict;
+import com.luffy.artist.entity.UserSignature;
 import com.luffy.artist.enums.ErrorCode;
+import com.luffy.artist.service.SysDictService;
+import com.luffy.artist.service.UserSignatureService;
 import com.luffy.artist.vo.ConvertReq;
 import com.luffy.artist.vo.ConvertResp;
 import com.luffy.artist.vo.Result;
@@ -8,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +29,11 @@ import java.util.regex.Pattern;
 public class TaoPasswordController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaoPasswordController.class);
+
+    @Autowired
+    private SysDictService sysDictService;
+    @Autowired
+    private UserSignatureService userSignatureService;
 
     /**
      * 转换口令
@@ -62,8 +72,23 @@ public class TaoPasswordController {
         String s2 = matcher2.group();
         LOGGER.info("转换后--------------");
         LOGGER.info(content.replace(s ,s2));
+        String result = content.replace(s ,s2);
+        SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
+        // 签名设置打开，且有默认签名，则把签名拼接到转换后的口令结果上
+        if ("1".equals(sysDict.getSubtypeValue())) {
+            UserSignature userSignature = userSignatureService.queryDefaultUserSignature("admin");
+            if (userSignature != null) {
+                StringBuffer sb = new StringBuffer();
+                sb.append(result);
+                sb.append("\n");
+                sb.append("---------------------");
+                sb.append("\n");
+                sb.append(userSignature.getContent());
+                result = sb.toString();
+            }
+        }
         ConvertResp convertResp = new ConvertResp();
-        convertResp.setConvertResult(content.replace(s ,s2));
+        convertResp.setConvertResult(result);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), convertResp);
     }
 
