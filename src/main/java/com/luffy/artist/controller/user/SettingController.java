@@ -6,6 +6,7 @@ import com.luffy.artist.enums.ErrorCode;
 import com.luffy.artist.service.SysDictService;
 import com.luffy.artist.service.UserSignatureService;
 import com.luffy.artist.vo.Result;
+import com.luffy.artist.vo.user.SignatureSwitchResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -41,12 +42,14 @@ public class SettingController {
     @ResponseBody
     @GetMapping("/signature/switch")
     @ApiOperation(value = "查询签名开关设置")
-    public Result<SysDict> querySignatureSwitch() {
+    public Result<SignatureSwitchResp> querySignatureSwitch() {
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
             return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
         }
-        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), sysDict);
+        SignatureSwitchResp signatureSwitchResp = new SignatureSwitchResp();
+        signatureSwitchResp.setSubtypeValue(sysDict.getSubtypeValue());
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), signatureSwitchResp);
     }
 
     /**
@@ -56,7 +59,7 @@ public class SettingController {
     @ResponseBody
     @PutMapping("/signature/switch")
     @ApiOperation(value = "设置签名开关")
-    public Result<SysDict> signatureSwitch() {
+    public Result<Boolean> signatureSwitch() {
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
             return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
@@ -76,7 +79,7 @@ public class SettingController {
                 return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
         }
         sysDictService.updateSysDict(updateSysDict);
-        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), sysDict);
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
 
     /**
