@@ -43,12 +43,15 @@ public class SettingController {
     @GetMapping("/signature/switch")
     @ApiOperation(value = "查询签名开关设置")
     public Result<SignatureSwitchResp> querySignatureSwitch() {
+        LOGGER.info("---查询签名开关设置start---");
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
+            LOGGER.info("---查询签名开关设置end---");
             return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
         }
         SignatureSwitchResp signatureSwitchResp = new SignatureSwitchResp();
         signatureSwitchResp.setSubtypeValue(sysDict.getSubtypeValue());
+        LOGGER.info("---查询签名开关设置end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), signatureSwitchResp);
     }
 
@@ -60,8 +63,10 @@ public class SettingController {
     @PutMapping("/signature/switch")
     @ApiOperation(value = "设置签名开关")
     public Result<Boolean> signatureSwitch() {
+        LOGGER.info("---设置签名开关start---");
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
+            LOGGER.info("---设置签名开关end---");
             return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
         }
         SysDict updateSysDict = new SysDict();
@@ -76,9 +81,11 @@ public class SettingController {
                 LOGGER.info("---已关闭签名开关---");
                 break;
             default:
+                LOGGER.info("---设置签名开关end---");
                 return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
         }
         sysDictService.updateSysDict(updateSysDict);
+        LOGGER.info("---设置签名开关end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
 
@@ -90,7 +97,9 @@ public class SettingController {
     @GetMapping("/signature/list")
     @ApiOperation(value = "查询用户签名列表")
     public Result<List<UserSignature>> queryUserSignatureList() {
+        LOGGER.info("---查询用户签名列表start---");
         List<UserSignature> userSignatureList = userSignatureService.queryUserSignatureListByUserId("admin");
+        LOGGER.info("---查询用户签名列表end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), userSignatureList);
     }
 
@@ -103,10 +112,13 @@ public class SettingController {
     @GetMapping("/signature/{id}")
     @ApiOperation(value = "查询用户签名")
     public Result<UserSignature> queryUserSignature(@PathVariable("id") Integer id) {
+        LOGGER.info("---查询用户签名start---");
         if (id == null) {
+            LOGGER.info("---查询用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         UserSignature userSignature = userSignatureService.queryUserSignatureById(id);
+        LOGGER.info("---查询用户签名end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), userSignature);
     }
 
@@ -119,13 +131,17 @@ public class SettingController {
     @PostMapping("/signature")
     @ApiOperation(value = "增加用户签名")
     public Result<Boolean> addUserSignature(@RequestBody UserSignature userSignature) {
+        LOGGER.info("---增加用户签名start---");
         if (userSignature == null) {
+            LOGGER.info("---增加用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         if (StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
+            LOGGER.info("---增加用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         userSignature.setUserId("admin");
+        LOGGER.info("---增加用户签名end---");
         userSignatureService.addUserSignature(userSignature);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
@@ -139,13 +155,17 @@ public class SettingController {
     @PutMapping("/signature")
     @ApiOperation(value = "修改用户签名")
     public Result<Boolean> modifyUserSignature(@RequestBody UserSignature userSignature) {
+        LOGGER.info("---修改用户签名start---");
         if (userSignature == null) {
+            LOGGER.info("---修改用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         if (StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
+            LOGGER.info("---修改用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         userSignatureService.modifyUserSignature(userSignature);
+        LOGGER.info("---修改用户签名end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
 
@@ -158,10 +178,13 @@ public class SettingController {
     @DeleteMapping("/signature/{id}")
     @ApiOperation(value = "删除用户签名")
     public Result<Boolean> deleteUserSignature(@PathVariable("id") Integer id) {
+        LOGGER.info("---删除用户签名start---");
         if (id == null) {
+            LOGGER.info("---删除用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         userSignatureService.deleteUserSignature(id);
+        LOGGER.info("---删除用户签名end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
 
@@ -174,10 +197,13 @@ public class SettingController {
     @PutMapping("/signature/{id}/default")
     @ApiOperation(value = "设置默认用户签名")
     public Result<Boolean> configDefaultUserSignature(@PathVariable("id") Integer id) {
+        LOGGER.info("---设置默认用户签名start---");
         if (id == null) {
+            LOGGER.info("---设置默认用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         userSignatureService.configDefaultUserSignature(id);
+        LOGGER.info("---设置默认用户签名end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
 }

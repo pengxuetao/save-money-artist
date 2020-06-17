@@ -51,7 +51,9 @@ public class TaoPasswordController {
     @PostMapping("/convert")
     @ApiOperation(value = "转换口令")
     public Result<ConvertResp> convert(@RequestBody ConvertReq convertReq){
+        LOGGER.info("---转换口令start---");
         if(StringUtils.isEmpty(convertReq.getOriString()) || StringUtils.isEmpty(convertReq.getTargetString()) ) {
+            LOGGER.info("---转换口令end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         String patternExpression;
@@ -68,9 +70,11 @@ public class TaoPasswordController {
         Matcher matcher = pattern.matcher(content);
         Matcher matcher2 = pattern.matcher(content2);
         if(!matcher.find()) {
+            LOGGER.info("---转换口令end---");
             return new Result<>(ErrorCode.ERROR_90001.getCode(), ErrorCode.ERROR_90001.getErrorDesc());
         }
         if(!matcher2.find()) {
+            LOGGER.info("---转换口令end---");
             return new Result<>(ErrorCode.ERROR_90001.getCode(), ErrorCode.ERROR_90001.getErrorDesc());
         }
         LOGGER.info("转换前--------------");
@@ -95,6 +99,7 @@ public class TaoPasswordController {
         }
         ConvertResp convertResp = new ConvertResp();
         convertResp.setConvertResult(result);
+        LOGGER.info("---转换口令end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), convertResp);
     }
 
