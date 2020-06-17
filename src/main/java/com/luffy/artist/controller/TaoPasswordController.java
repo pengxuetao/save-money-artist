@@ -14,7 +14,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,9 +37,9 @@ public class TaoPasswordController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaoPasswordController.class);
 
-    @Autowired
+    @Resource
     private SysDictService sysDictService;
-    @Autowired
+    @Resource
     private UserSignatureService userSignatureService;
 
     /**
@@ -88,9 +88,7 @@ public class TaoPasswordController {
             if (userSignature != null) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(result);
-                sb.append("\n");
-                sb.append("---------------------");
-                sb.append("\n");
+                sb.append("\n---------------------\n");
                 sb.append(userSignature.getContent());
                 result = sb.toString();
             }

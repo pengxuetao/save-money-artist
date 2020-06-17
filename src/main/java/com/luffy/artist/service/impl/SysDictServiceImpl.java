@@ -3,8 +3,9 @@ package com.luffy.artist.service.impl;
 import com.luffy.artist.dao.SysDictMapper;
 import com.luffy.artist.entity.SysDict;
 import com.luffy.artist.service.SysDictService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 数据字典Service实现类
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysDictServiceImpl implements SysDictService {
 
-    @Autowired
+    @Resource
     private SysDictMapper sysDictMapper;
 
     /**

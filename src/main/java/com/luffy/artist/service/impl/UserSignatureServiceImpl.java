@@ -3,9 +3,9 @@ package com.luffy.artist.service.impl;
 import com.luffy.artist.dao.UserSignatureMapper;
 import com.luffy.artist.entity.UserSignature;
 import com.luffy.artist.service.UserSignatureService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class UserSignatureServiceImpl implements UserSignatureService {
 
-    @Autowired
+    @Resource
     private UserSignatureMapper userSignatureMapper;
 
     /**
@@ -86,6 +86,7 @@ public class UserSignatureServiceImpl implements UserSignatureService {
      */
     @Override
     public int configDefaultUserSignature(Integer id) {
+        // 查询当前默认签名，没有则将传入签名设为默认，有且不是当前签名则将当前设为非默认
         UserSignature defaultUserSignature = userSignatureMapper.selectDefaultByUserId("admin");
         if (defaultUserSignature == null) {
             return userSignatureMapper.updateDefaultByPrimaryKey(id, (byte) 1);
