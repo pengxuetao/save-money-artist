@@ -2,7 +2,9 @@ package com.luffy.artist.controller;
 
 import com.luffy.artist.entity.SysDict;
 import com.luffy.artist.entity.UserSignature;
+import com.luffy.artist.enums.DictEnum;
 import com.luffy.artist.enums.ErrorCode;
+import com.luffy.artist.enums.SymbolEnum;
 import com.luffy.artist.service.SysDictService;
 import com.luffy.artist.service.UserSignatureService;
 import com.luffy.artist.vo.ConvertReq;
@@ -23,6 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 淘口令控制类
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 @Controller
 @Api("淘口令")
 @RequestMapping("/taopassword")
@@ -48,7 +55,8 @@ public class TaoPasswordController {
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
         String patternExpression;
-        if(convertReq.getOriString().contains("(") && convertReq.getOriString().contains(")")) {
+        if(convertReq.getOriString().contains(SymbolEnum.LEFT_PARENTHESIS.getCode())
+                && convertReq.getOriString().contains(SymbolEnum.RIGHT_PARENTHESIS.getCode())) {
             patternExpression = "([\\p{Punct}])\\w{8,12}([\\p{Punct}])";
         } else {
             patternExpression = "([\\p{Sc}])\\w{8,12}([\\p{Sc}])";
@@ -75,10 +83,10 @@ public class TaoPasswordController {
         String result = content.replace(s ,s2);
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         // 签名设置打开，且有默认签名，则把签名拼接到转换后的口令结果上
-        if ("1".equals(sysDict.getSubtypeValue())) {
+        if (DictEnum.SIGNATURE_SWITCH_ON.getCode().equals(sysDict.getSubtypeValue())) {
             UserSignature userSignature = userSignatureService.queryDefaultUserSignature("admin");
             if (userSignature != null) {
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 sb.append(result);
                 sb.append("\n");
                 sb.append("---------------------");

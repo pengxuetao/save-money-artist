@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 系统设置控制类
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 @Controller
 @Api("设置")
 @RequestMapping("/setting")

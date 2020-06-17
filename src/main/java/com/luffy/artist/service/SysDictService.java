@@ -2,6 +2,11 @@ package com.luffy.artist.service;
 
 import com.luffy.artist.entity.SysDict;
 
+/**
+ * 数据字典Service接口
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 public interface SysDictService {
 
     /**

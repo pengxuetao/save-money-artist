@@ -6,6 +6,11 @@ import com.luffy.artist.service.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 数据字典Service实现类
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 @Service
 public class SysDictServiceImpl implements SysDictService {
 

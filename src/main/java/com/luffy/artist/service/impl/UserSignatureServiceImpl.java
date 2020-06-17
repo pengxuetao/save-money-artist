@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 用户签名Service实现类
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 @Service
 public class UserSignatureServiceImpl implements UserSignatureService {
 

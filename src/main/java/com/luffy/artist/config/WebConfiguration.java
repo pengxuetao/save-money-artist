@@ -2,10 +2,15 @@ package com.luffy.artist.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Web配置类
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 @Configuration
-public class CORSConfiguration extends WebMvcConfigurerAdapter {
+public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -14,6 +19,5 @@ public class CORSConfiguration extends WebMvcConfigurerAdapter {
                 .allowedOrigins("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);
-        super.addCorsMappings(registry);
     }
 }

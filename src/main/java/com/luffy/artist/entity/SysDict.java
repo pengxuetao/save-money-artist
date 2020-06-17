@@ -5,8 +5,9 @@ import java.util.Date;
 
 /**
  * 数据字典
- * @author 
  * 系统字典配置表
+ * @author Peng xue-tao
+ * @since 2020/6/17
  */
 public class SysDict implements Serializable {
     /**

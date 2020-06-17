@@ -1,20 +1,18 @@
 package com.luffy.artist.enums;
 
 /**
- * 系统错误码枚举值
+ * 符号枚举值
  * code为实际使用值，errorDesc为具体描述或者文案
  * @author Peng xue-tao
  * @since 2020/6/17
  */
-public enum ErrorCode {
+public enum SymbolEnum {
 
     /**
-     * 系统错误码
+     * 半角圆括号
      */
-    SUCCESS("0", "请求成功"),
-    FAILURE("1", "请求失败"),
-    ERROR_10000("10000", "非法的请求参数"),
-    ERROR_90001("90001", "请输入正确的淘口令");
+    LEFT_PARENTHESIS("(", "左半角圆括号"),
+    RIGHT_PARENTHESIS(")", "右半角圆括号");
 
     /**
      * 错误码
@@ -30,7 +28,7 @@ public enum ErrorCode {
         return code;
     }
 
-    ErrorCode(String code, String errorDesc) {
+    SymbolEnum(String code, String errorDesc) {
         this.code = code;
         this.errorDesc = errorDesc;
     }

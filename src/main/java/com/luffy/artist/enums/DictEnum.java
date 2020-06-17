@@ -1,20 +1,18 @@
 package com.luffy.artist.enums;
 
 /**
- * 系统错误码枚举值
+ * 数据字典枚举值
  * code为实际使用值，errorDesc为具体描述或者文案
  * @author Peng xue-tao
  * @since 2020/6/17
  */
-public enum ErrorCode {
+public enum DictEnum {
 
     /**
-     * 系统错误码
+     * 签名开关 0-关 1-开
      */
-    SUCCESS("0", "请求成功"),
-    FAILURE("1", "请求失败"),
-    ERROR_10000("10000", "非法的请求参数"),
-    ERROR_90001("90001", "请输入正确的淘口令");
+    SIGNATURE_SWITCH_OFF("0", "关"),
+    SIGNATURE_SWITCH_ON("1", "开");
 
     /**
      * 错误码
@@ -30,7 +28,7 @@ public enum ErrorCode {
         return code;
     }
 
-    ErrorCode(String code, String errorDesc) {
+    DictEnum(String code, String errorDesc) {
         this.code = code;
         this.errorDesc = errorDesc;
     }

@@ -5,8 +5,9 @@ import java.util.Date;
 
 /**
  * 用户签名
- * @author Peng xue-tao
  * 用户签名表
+ * @author Peng xue-tao
+ * @since 2020/6/17
  */
 public class UserSignature implements Serializable {
     /**

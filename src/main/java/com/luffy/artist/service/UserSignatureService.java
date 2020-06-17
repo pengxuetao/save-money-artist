@@ -4,6 +4,11 @@ import com.luffy.artist.entity.UserSignature;
 
 import java.util.List;
 
+/**
+ * 用户签名Service接口
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 public interface UserSignatureService {
 
     /**

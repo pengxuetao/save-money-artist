@@ -5,17 +5,52 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * 用户签名Mapper
+ * @author Peng xue-tao
+ * @since 2020/6/17
+ */
 public interface UserSignatureMapper {
+    /**
+     * 根据id删除用户签名
+     * @param id id
+     * @return int
+     */
     int deleteByPrimaryKey(Integer id);
 
+    /**
+     * 插入用户签名
+     * @param record 用户签名
+     * @return int
+     */
     int insert(UserSignature record);
 
+    /**
+     * 选择性插入用户签名
+     * @param record 用户签名
+     * @return int
+     */
     int insertSelective(UserSignature record);
 
+    /**
+     * 根据id查询用户签名
+     * @param id id
+     * @return UserSignature
+     */
     UserSignature selectByPrimaryKey(Integer id);
 
+    /**
+     * 选择性更新用户签名
+     * @param record 用户签名
+     * @return int
+     */
     int updateByPrimaryKeySelective(UserSignature record);
 
+    /**
+     * 更新用户签名
+     * @param record 用户签名
+     * @return int
+     */
     int updateByPrimaryKey(UserSignature record);
 
     /**

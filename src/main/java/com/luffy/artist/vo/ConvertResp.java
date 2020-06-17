@@ -3,6 +3,7 @@ package com.luffy.artist.vo;
 /**
  * 转换口令返回参数
  * @author Peng xue-tao
+ * @since 2020/6/17
  */
 public class ConvertResp {
 

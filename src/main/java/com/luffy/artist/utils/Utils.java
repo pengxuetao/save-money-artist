@@ -4,6 +4,8 @@ import java.util.UUID;
 
 /**
  * 工具类
+ * @author Peng xue-tao
+ * @since 2020/6/17
  */
 public class Utils {
 
@@ -11,7 +13,7 @@ public class Utils {
      * 获取UUID
      * @return
      */
-    public static String getUUID(){
+    public static String generateUUID(){
         String uuid = UUID.randomUUID().toString();
         uuid = uuid.replace("-", "");
         return uuid;
@@ -30,13 +32,13 @@ public class Utils {
     }
 
     public static void main(String[] args) {
-        System.out.println(Utils.getUUID());
+        System.out.println(Utils.generateUUID());
         System.out.println(Utils.getRandomFileName("124154.123.5.jpg"));
 
         String[] arr = {"1","2","3"};
         StringBuilder condition = new StringBuilder();
         for(String str: arr) {
-            condition.append(str+"','");
+            condition.append(str).append("','");
         }
         System.out.println(condition.toString());
         System.out.println(condition.toString().substring(0,condition.toString().length()-3));
