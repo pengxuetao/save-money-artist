@@ -35,11 +35,26 @@ public class SettingController {
     private UserSignatureService userSignatureService;
 
     /**
+     * 查询签名开关设置
+     * @return Result<SysDict>
+     */
+    @ResponseBody
+    @GetMapping("/signature/switch")
+    @ApiOperation(value = "查询签名开关设置")
+    public Result<SysDict> querySignatureSwitch() {
+        SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
+        if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
+            return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
+        }
+        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), sysDict);
+    }
+
+    /**
      * 设置签名开关
      * @return Result<SysDict>
      */
     @ResponseBody
-    @PostMapping("/signatureSwitch")
+    @PutMapping("/signature/switch")
     @ApiOperation(value = "设置签名开关")
     public Result<SysDict> signatureSwitch() {
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
@@ -65,26 +80,11 @@ public class SettingController {
     }
 
     /**
-     * 查询签名开关设置
-     * @return Result<SysDict>
-     */
-    @ResponseBody
-    @PostMapping("/querySignatureSwitch")
-    @ApiOperation(value = "查询签名开关设置")
-    public Result<SysDict> querySignatureSwitch() {
-        SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
-        if (sysDict == null || StringUtils.isEmpty(sysDict.getSubtypeValue())) {
-            return new Result<>(ErrorCode.FAILURE.getCode(), ErrorCode.FAILURE.getErrorDesc());
-        }
-        return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), sysDict);
-    }
-
-    /**
      * 查询用户签名列表
      * @return Result<List<UserSignature>>
      */
     @ResponseBody
-    @GetMapping("/queryUserSignatureList")
+    @GetMapping("/signature/list")
     @ApiOperation(value = "查询用户签名列表")
     public Result<List<UserSignature>> queryUserSignatureList() {
         List<UserSignature> userSignatureList = userSignatureService.queryUserSignatureListByUserId("admin");
@@ -97,9 +97,9 @@ public class SettingController {
      * @return Result<UserSignature>
      */
     @ResponseBody
-    @GetMapping("/queryUserSignature")
+    @GetMapping("/signature/{id}")
     @ApiOperation(value = "查询用户签名")
-    public Result<UserSignature> queryUserSignature(@RequestParam("id") Integer id) {
+    public Result<UserSignature> queryUserSignature(@PathVariable("id") Integer id) {
         UserSignature userSignature = userSignatureService.queryUserSignatureById(id);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), userSignature);
     }
@@ -110,7 +110,7 @@ public class SettingController {
      * @return int
      */
     @ResponseBody
-    @PostMapping("/addUserSignature")
+    @PostMapping("/signature")
     @ApiOperation(value = "增加用户签名")
     public Result<Boolean> addUserSignature(@RequestBody UserSignature userSignature) {
         userSignature.setUserId("admin");
@@ -124,7 +124,7 @@ public class SettingController {
      * @return int
      */
     @ResponseBody
-    @PostMapping("/modifyUserSignature")
+    @PutMapping("/signature")
     @ApiOperation(value = "修改用户签名")
     public Result<Boolean> modifyUserSignature(@RequestBody UserSignature userSignature) {
         userSignatureService.modifyUserSignature(userSignature);
@@ -137,9 +137,9 @@ public class SettingController {
      * @return int
      */
     @ResponseBody
-    @PostMapping("/deleteUserSignature")
+    @DeleteMapping("/signature/{id}")
     @ApiOperation(value = "删除用户签名")
-    public Result<Boolean> deleteUserSignature(@RequestParam("id") Integer id) {
+    public Result<Boolean> deleteUserSignature(@PathVariable("id") Integer id) {
         userSignatureService.deleteUserSignature(id);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
@@ -150,9 +150,9 @@ public class SettingController {
      * @return int
      */
     @ResponseBody
-    @PostMapping("/configDefaultUserSignature")
+    @PutMapping("/signature/{id}/default")
     @ApiOperation(value = "设置默认用户签名")
-    public Result<Boolean> configDefaultUserSignature(@RequestParam("id") Integer id) {
+    public Result<Boolean> configDefaultUserSignature(@PathVariable("id") Integer id) {
         userSignatureService.configDefaultUserSignature(id);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }

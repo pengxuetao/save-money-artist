@@ -44,8 +44,8 @@ public class TaoPasswordController {
 
     /**
      * 转换口令
-     * @param convertReq
-     * @return
+     * @param convertReq 转换口令请求参数
+     * @return Result<ConvertResp>
      */
     @ResponseBody
     @PostMapping("/convert")
