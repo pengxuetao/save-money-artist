@@ -100,6 +100,9 @@ public class SettingController {
     @GetMapping("/signature/{id}")
     @ApiOperation(value = "查询用户签名")
     public Result<UserSignature> queryUserSignature(@PathVariable("id") Integer id) {
+        if (id == null) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
         UserSignature userSignature = userSignatureService.queryUserSignatureById(id);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), userSignature);
     }
@@ -113,6 +116,12 @@ public class SettingController {
     @PostMapping("/signature")
     @ApiOperation(value = "增加用户签名")
     public Result<Boolean> addUserSignature(@RequestBody UserSignature userSignature) {
+        if (userSignature == null) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
+        if (StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
         userSignature.setUserId("admin");
         userSignatureService.addUserSignature(userSignature);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
@@ -127,6 +136,12 @@ public class SettingController {
     @PutMapping("/signature")
     @ApiOperation(value = "修改用户签名")
     public Result<Boolean> modifyUserSignature(@RequestBody UserSignature userSignature) {
+        if (userSignature == null) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
+        if (StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
         userSignatureService.modifyUserSignature(userSignature);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
@@ -140,6 +155,9 @@ public class SettingController {
     @DeleteMapping("/signature/{id}")
     @ApiOperation(value = "删除用户签名")
     public Result<Boolean> deleteUserSignature(@PathVariable("id") Integer id) {
+        if (id == null) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
         userSignatureService.deleteUserSignature(id);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
@@ -153,6 +171,9 @@ public class SettingController {
     @PutMapping("/signature/{id}/default")
     @ApiOperation(value = "设置默认用户签名")
     public Result<Boolean> configDefaultUserSignature(@PathVariable("id") Integer id) {
+        if (id == null) {
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
         userSignatureService.configDefaultUserSignature(id);
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
