@@ -160,7 +160,12 @@ public class SettingController {
             LOGGER.info("---修改用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
-        if (StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
+        if (userSignature.getId() == 0 || StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
+            LOGGER.info("---修改用户签名end---");
+            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
+        }
+        UserSignature isExist = userSignatureService.queryUserSignatureById(userSignature.getId());
+        if (isExist == null) {
             LOGGER.info("---修改用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
