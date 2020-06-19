@@ -4,6 +4,7 @@ import com.luffy.artist.dao.UserSignatureMapper;
 import com.luffy.artist.entity.UserSignature;
 import com.luffy.artist.service.UserSignatureService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -56,6 +57,12 @@ public class UserSignatureServiceImpl implements UserSignatureService {
      */
     @Override
     public int addUserSignature(UserSignature userSignature) {
+        // 查询当前用户的签名列表
+        List<UserSignature> userSignatureList = userSignatureMapper.selectListByUserId("admin");
+        // 如果用户没有签名，则该签名设置为默认签名
+        if (CollectionUtils.isEmpty(userSignatureList)) {
+            userSignature.setIsDefault((byte) 1);
+        }
         return userSignatureMapper.insertSelective(userSignature);
     }
 
