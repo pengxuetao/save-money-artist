@@ -19,16 +19,16 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 系统设置控制类
+ * 我的控制类
  * @author Peng xue-tao
  * @since 2020/6/17
  */
 @Controller
-@Api("设置")
-@RequestMapping("/setting")
-public class SettingController {
+@Api("我的")
+@RequestMapping("/profile")
+public class ProfileController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SettingController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProfileController.class);
 
     @Resource
     private SysDictService sysDictService;
