@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +26,7 @@ import java.util.List;
  * @author Peng xue-tao
  * @since 2020/6/17
  */
-@Controller
+@RestController
 @Api("我的")
 @RequestMapping("/profile")
 public class ProfileController {
@@ -43,7 +42,6 @@ public class ProfileController {
      * 查询签名开关设置
      * @return Result<SysDict>
      */
-    @ResponseBody
     @GetMapping("/signature/switch")
     @ApiOperation(value = "查询签名开关设置")
     public Result<SignatureSwitchResp> querySignatureSwitch() {
@@ -63,7 +61,6 @@ public class ProfileController {
      * 设置签名开关
      * @return Result<SysDict>
      */
-    @ResponseBody
     @PutMapping("/signature/switch")
     @ApiOperation(value = "设置签名开关")
     public Result<Boolean> signatureSwitch() {
@@ -97,7 +94,6 @@ public class ProfileController {
      * 查询用户签名列表
      * @return Result<List<UserSignature>>
      */
-    @ResponseBody
     @GetMapping("/signature/list")
     @ApiOperation(value = "查询用户签名列表")
     public Result<List<UserSignature>> queryUserSignatureList() {
@@ -112,7 +108,6 @@ public class ProfileController {
      * @param id ID主键
      * @return Result<UserSignature>
      */
-    @ResponseBody
     @GetMapping("/signature/{id}")
     @ApiOperation(value = "查询用户签名")
     public Result<UserSignature> queryUserSignature(@PathVariable("id") Integer id) {
@@ -131,7 +126,6 @@ public class ProfileController {
      * @param addUserSignatureReq 用户签名
      * @return int
      */
-    @ResponseBody
     @PostMapping("/signature")
     @ApiOperation(value = "增加用户签名")
     public Result<Boolean> addUserSignature(@RequestBody @Valid AddUserSignatureReq addUserSignatureReq) {
@@ -149,7 +143,6 @@ public class ProfileController {
      * @param modifyUserSignatureReq 用户签名
      * @return int
      */
-    @ResponseBody
     @PutMapping("/signature")
     @ApiOperation(value = "修改用户签名")
     public Result<Boolean> modifyUserSignature(@RequestBody @Valid ModifyUserSignatureReq modifyUserSignatureReq) {
@@ -171,7 +164,6 @@ public class ProfileController {
      * @param id ID主键
      * @return int
      */
-    @ResponseBody
     @DeleteMapping("/signature/{id}")
     @ApiOperation(value = "删除用户签名")
     public Result<Boolean> deleteUserSignature(@PathVariable("id") Integer id) {
@@ -190,7 +182,6 @@ public class ProfileController {
      * @param id ID主键
      * @return int
      */
-    @ResponseBody
     @PutMapping("/signature/{id}/default")
     @ApiOperation(value = "设置默认用户签名")
     public Result<Boolean> configDefaultUserSignature(@PathVariable("id") Integer id) {

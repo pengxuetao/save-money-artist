@@ -14,11 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -30,7 +26,7 @@ import java.util.regex.Pattern;
  * @author Peng xue-tao
  * @since 2020/6/17
  */
-@Controller
+@RestController
 @Api("淘口令")
 @RequestMapping("/taopassword")
 public class TaoPasswordController {
@@ -47,7 +43,6 @@ public class TaoPasswordController {
      * @param convertReq 转换口令请求参数
      * @return Result<ConvertResp>
      */
-    @ResponseBody
     @PostMapping("/convert")
     @ApiOperation(value = "转换口令")
     public Result<ConvertResp> convert(@RequestBody @Valid ConvertReq convertReq){
