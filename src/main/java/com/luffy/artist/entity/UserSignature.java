@@ -102,4 +102,17 @@ public class UserSignature implements Serializable {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+    @Override
+    public String toString() {
+        return "UserSignature{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", isDefault=" + isDefault +
+                ", updateDate=" + updateDate +
+                ", createDate=" + createDate +
+                '}';
+    }
 }

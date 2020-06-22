@@ -128,4 +128,19 @@ public class SysDict implements Serializable {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+    @Override
+    public String toString() {
+        return "SysDict{" +
+                "id=" + id +
+                ", typeKey='" + typeKey + '\'' +
+                ", typeDesc='" + typeDesc + '\'' +
+                ", subtypeName='" + subtypeName + '\'' +
+                ", subtypeValue='" + subtypeValue + '\'' +
+                ", sort=" + sort +
+                ", remark='" + remark + '\'' +
+                ", updateDate=" + updateDate +
+                ", createDate=" + createDate +
+                '}';
+    }
 }
