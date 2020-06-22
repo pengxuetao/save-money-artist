@@ -19,4 +19,11 @@ public class ConvertResp {
     public void setConvertResult(String convertResult) {
         this.convertResult = convertResult;
     }
+
+    @Override
+    public String toString() {
+        return "ConvertResp{" +
+                "convertResult='" + convertResult + '\'' +
+                '}';
+    }
 }

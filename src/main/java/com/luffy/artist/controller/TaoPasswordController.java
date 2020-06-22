@@ -15,13 +15,13 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,12 +50,8 @@ public class TaoPasswordController {
     @ResponseBody
     @PostMapping("/convert")
     @ApiOperation(value = "转换口令")
-    public Result<ConvertResp> convert(@RequestBody ConvertReq convertReq){
+    public Result<ConvertResp> convert(@RequestBody @Valid ConvertReq convertReq){
         LOGGER.info("---转换口令start---");
-        if(StringUtils.isEmpty(convertReq.getOriString()) || StringUtils.isEmpty(convertReq.getTargetString()) ) {
-            LOGGER.info("---转换口令end---");
-            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
-        }
         String patternExpression;
         if(convertReq.getOriString().contains(SymbolEnum.LEFT_PARENTHESIS.getCode())
                 && convertReq.getOriString().contains(SymbolEnum.RIGHT_PARENTHESIS.getCode())) {

@@ -19,4 +19,11 @@ public class SignatureSwitchResp {
     public void setSubtypeValue(String subtypeValue) {
         this.subtypeValue = subtypeValue;
     }
+
+    @Override
+    public String toString() {
+        return "SignatureSwitchResp{" +
+                "subtypeValue='" + subtypeValue + '\'' +
+                '}';
+    }
 }

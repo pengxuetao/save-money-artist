@@ -6,16 +6,20 @@ import com.luffy.artist.enums.ErrorCode;
 import com.luffy.artist.service.SysDictService;
 import com.luffy.artist.service.UserSignatureService;
 import com.luffy.artist.vo.Result;
+import com.luffy.artist.vo.user.AddUserSignatureReq;
+import com.luffy.artist.vo.user.ModifyUserSignatureReq;
 import com.luffy.artist.vo.user.SignatureSwitchResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -113,7 +117,7 @@ public class ProfileController {
     @ApiOperation(value = "查询用户签名")
     public Result<UserSignature> queryUserSignature(@PathVariable("id") Integer id) {
         LOGGER.info("---查询用户签名start---");
-        if (id == null) {
+        if (id < 1) {
             LOGGER.info("---查询用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
@@ -124,51 +128,39 @@ public class ProfileController {
 
     /**
      * 增加用户签名
-     * @param userSignature 用户签名
+     * @param addUserSignatureReq 用户签名
      * @return int
      */
     @ResponseBody
     @PostMapping("/signature")
     @ApiOperation(value = "增加用户签名")
-    public Result<Boolean> addUserSignature(@RequestBody UserSignature userSignature) {
+    public Result<Boolean> addUserSignature(@RequestBody @Valid AddUserSignatureReq addUserSignatureReq) {
         LOGGER.info("---增加用户签名start---");
-        if (userSignature == null) {
-            LOGGER.info("---增加用户签名end---");
-            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
-        }
-        if (StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
-            LOGGER.info("---增加用户签名end---");
-            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
-        }
+        UserSignature userSignature = new UserSignature();
+        BeanUtils.copyProperties(addUserSignatureReq, userSignature);
         userSignature.setUserId("admin");
-        LOGGER.info("---增加用户签名end---");
         userSignatureService.addUserSignature(userSignature);
+        LOGGER.info("---增加用户签名end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
     }
 
     /**
      * 修改用户签名
-     * @param userSignature 用户签名
+     * @param modifyUserSignatureReq 用户签名
      * @return int
      */
     @ResponseBody
     @PutMapping("/signature")
     @ApiOperation(value = "修改用户签名")
-    public Result<Boolean> modifyUserSignature(@RequestBody UserSignature userSignature) {
+    public Result<Boolean> modifyUserSignature(@RequestBody @Valid ModifyUserSignatureReq modifyUserSignatureReq) {
         LOGGER.info("---修改用户签名start---");
-        if (userSignature == null) {
-            LOGGER.info("---修改用户签名end---");
-            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
-        }
-        if (userSignature.getId() == 0 || StringUtils.isEmpty(userSignature.getTitle()) || StringUtils.isEmpty(userSignature.getContent())) {
-            LOGGER.info("---修改用户签名end---");
-            return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
-        }
-        UserSignature isExist = userSignatureService.queryUserSignatureById(userSignature.getId());
+        UserSignature isExist = userSignatureService.queryUserSignatureById(modifyUserSignatureReq.getId());
         if (isExist == null) {
             LOGGER.info("---修改用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
+        UserSignature userSignature = new UserSignature();
+        BeanUtils.copyProperties(modifyUserSignatureReq, userSignature);
         userSignatureService.modifyUserSignature(userSignature);
         LOGGER.info("---修改用户签名end---");
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getErrorDesc(), true);
@@ -184,7 +176,7 @@ public class ProfileController {
     @ApiOperation(value = "删除用户签名")
     public Result<Boolean> deleteUserSignature(@PathVariable("id") Integer id) {
         LOGGER.info("---删除用户签名start---");
-        if (id == null) {
+        if (id < 1) {
             LOGGER.info("---删除用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
@@ -203,7 +195,7 @@ public class ProfileController {
     @ApiOperation(value = "设置默认用户签名")
     public Result<Boolean> configDefaultUserSignature(@PathVariable("id") Integer id) {
         LOGGER.info("---设置默认用户签名start---");
-        if (id == null) {
+        if (id < 1) {
             LOGGER.info("---设置默认用户签名end---");
             return new Result<>(ErrorCode.ERROR_10000.getCode(), ErrorCode.ERROR_10000.getErrorDesc());
         }
