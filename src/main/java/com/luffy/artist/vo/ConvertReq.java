@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * 转换口令请求参数
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */

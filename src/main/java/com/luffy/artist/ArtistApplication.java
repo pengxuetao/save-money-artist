@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 应用启动类
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */

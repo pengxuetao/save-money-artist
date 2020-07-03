@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 用户签名Service接口
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */
@@ -13,6 +14,7 @@ public interface UserSignatureService {
 
     /**
      * 根据用户ID查询签名列表
+     *
      * @param userId 用户ID
      * @return List<UserSignature>
      */
@@ -20,6 +22,7 @@ public interface UserSignatureService {
 
     /**
      * 根据ID主键查询签名
+     *
      * @param id ID主键
      * @return UserSignature
      */
@@ -27,6 +30,7 @@ public interface UserSignatureService {
 
     /**
      * 根据用户ID查询默认签名
+     *
      * @param userId 用户ID
      * @return UserSignature
      */
@@ -34,6 +38,7 @@ public interface UserSignatureService {
 
     /**
      * 增加用户签名
+     *
      * @param userSignature 用户签名
      * @return int
      */
@@ -41,6 +46,7 @@ public interface UserSignatureService {
 
     /**
      * 修改用户签名
+     *
      * @param userSignature 用户签名
      * @return int
      */
@@ -48,6 +54,7 @@ public interface UserSignatureService {
 
     /**
      * 删除用户签名
+     *
      * @param id ID主键
      * @return int
      */
@@ -55,6 +62,7 @@ public interface UserSignatureService {
 
     /**
      * 设置默认用户签名
+     *
      * @param id ID主键
      * @return int
      */

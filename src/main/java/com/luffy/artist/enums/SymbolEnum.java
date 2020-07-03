@@ -3,6 +3,7 @@ package com.luffy.artist.enums;
 /**
  * 符号枚举值
  * code为实际使用值，errorDesc为具体描述或者文案
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */

@@ -5,12 +5,14 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * 数据字典Mapper
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */
 public interface SysDictMapper {
     /**
      * 根据id删除数据字典
+     *
      * @param id id
      * @return int
      */
@@ -18,6 +20,7 @@ public interface SysDictMapper {
 
     /**
      * 插入数据字典
+     *
      * @param record 数据字典
      * @return int
      */
@@ -25,6 +28,7 @@ public interface SysDictMapper {
 
     /**
      * 选择性插入数据字典
+     *
      * @param record 数据字典
      * @return int
      */
@@ -32,6 +36,7 @@ public interface SysDictMapper {
 
     /**
      * 根据id查询数据字典
+     *
      * @param id id
      * @return SysDict
      */
@@ -39,6 +44,7 @@ public interface SysDictMapper {
 
     /**
      * 选择性更新数据字典
+     *
      * @param record 数据字典
      * @return int
      */
@@ -46,6 +52,7 @@ public interface SysDictMapper {
 
     /**
      * 更新数据字典
+     *
      * @param record 数据字典
      * @return int
      */
@@ -53,6 +60,7 @@ public interface SysDictMapper {
 
     /**
      * 根据类型键查询字典
+     *
      * @param typeKey 类型键
      * @return SysDict
      */

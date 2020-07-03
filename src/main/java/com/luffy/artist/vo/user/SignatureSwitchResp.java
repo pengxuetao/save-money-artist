@@ -2,6 +2,7 @@ package com.luffy.artist.vo.user;
 
 /**
  * 查询签名开关返回参数
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */

@@ -6,46 +6,40 @@ import java.util.Date;
 /**
  * 用户签名
  * 用户签名表
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */
 public class UserSignature implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * ID主键
      */
     private Integer id;
-
     /**
      * 用户ID
      */
     private String userId;
-
     /**
      * 标题
      */
     private String title;
-
     /**
      * 内容
      */
     private String content;
-
     /**
      * 是否默认 0-否 1-是
      */
     private Byte isDefault;
-
     /**
      * 更新时间
      */
     private Date updateDate;
-
     /**
      * 创建时间
      */
     private Date createDate;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

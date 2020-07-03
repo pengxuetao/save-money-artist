@@ -7,12 +7,14 @@ import java.util.List;
 
 /**
  * 用户签名Mapper
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */
 public interface UserSignatureMapper {
     /**
      * 根据id删除用户签名
+     *
      * @param id id
      * @return int
      */
@@ -20,6 +22,7 @@ public interface UserSignatureMapper {
 
     /**
      * 插入用户签名
+     *
      * @param record 用户签名
      * @return int
      */
@@ -27,6 +30,7 @@ public interface UserSignatureMapper {
 
     /**
      * 选择性插入用户签名
+     *
      * @param record 用户签名
      * @return int
      */
@@ -34,6 +38,7 @@ public interface UserSignatureMapper {
 
     /**
      * 根据id查询用户签名
+     *
      * @param id id
      * @return UserSignature
      */
@@ -41,6 +46,7 @@ public interface UserSignatureMapper {
 
     /**
      * 选择性更新用户签名
+     *
      * @param record 用户签名
      * @return int
      */
@@ -48,6 +54,7 @@ public interface UserSignatureMapper {
 
     /**
      * 更新用户签名
+     *
      * @param record 用户签名
      * @return int
      */
@@ -55,6 +62,7 @@ public interface UserSignatureMapper {
 
     /**
      * 根据用户ID查询签名列表
+     *
      * @param userId 用户ID
      * @return List<UserSignature>
      */
@@ -62,6 +70,7 @@ public interface UserSignatureMapper {
 
     /**
      * 根据用户ID查询默认签名
+     *
      * @param userId 用户ID
      * @return UserSignature
      */
@@ -69,7 +78,8 @@ public interface UserSignatureMapper {
 
     /**
      * 根据ID主键更新默认签名
-     * @param id ID主键
+     *
+     * @param id        ID主键
      * @param isDefault 是否默认 0-否 1-是
      * @return int
      */

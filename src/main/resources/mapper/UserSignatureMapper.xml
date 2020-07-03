@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luffy.artist.dao.UserSignatureMapper">
-  <resultMap id="BaseResultMap" type="com.luffy.artist.entity.UserSignature">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="is_default" jdbcType="TINYINT" property="isDefault" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.luffy.artist.entity.UserSignature">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="is_default" jdbcType="TINYINT" property="isDefault"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, user_id, title, content, is_default, update_date, create_date
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user_signature
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_signature
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_signature
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.luffy.artist.entity.UserSignature">
+    <insert id="insert" parameterType="com.luffy.artist.entity.UserSignature">
     insert into user_signature (id, user_id, title, 
       content, is_default, update_date, 
       create_date)
@@ -31,80 +31,80 @@
       #{content,jdbcType=VARCHAR}, #{isDefault,jdbcType=TINYINT}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.luffy.artist.entity.UserSignature">
-    insert into user_signature
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="isDefault != null">
-        is_default,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="isDefault != null">
-        #{isDefault,jdbcType=TINYINT},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.luffy.artist.entity.UserSignature">
-    update user_signature
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="isDefault != null">
-        is_default = #{isDefault,jdbcType=TINYINT},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.luffy.artist.entity.UserSignature">
+    <insert id="insertSelective" parameterType="com.luffy.artist.entity.UserSignature">
+        insert into user_signature
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="isDefault != null">
+                is_default,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault,jdbcType=TINYINT},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.luffy.artist.entity.UserSignature">
+        update user_signature
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault,jdbcType=TINYINT},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.luffy.artist.entity.UserSignature">
     update user_signature
     set user_id = #{userId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
@@ -115,25 +115,25 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!-- 根据用户ID查询签名列表 -->
-  <select id="selectListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from user_signature
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </select>
+    <!-- 根据用户ID查询签名列表 -->
+    <select id="selectListByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_signature
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
 
-  <!-- 根据用户ID查询默认签名 -->
-  <select id="selectDefaultByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from user_signature
-    where user_id = #{userId,jdbcType=VARCHAR}
-    and is_default = 1
-  </select>
+    <!-- 根据用户ID查询默认签名 -->
+    <select id="selectDefaultByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_signature
+        where user_id = #{userId,jdbcType=VARCHAR}
+        and is_default = 1
+    </select>
 
-  <!-- 根据ID主键更新默认签名 -->
-  <update id="updateDefaultByPrimaryKey">
+    <!-- 根据ID主键更新默认签名 -->
+    <update id="updateDefaultByPrimaryKey">
     update user_signature
     set is_default = #{isDefault,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}

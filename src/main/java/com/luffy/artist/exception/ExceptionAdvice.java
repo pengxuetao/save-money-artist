@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 异常通知类
+ *
  * @author Peng xue-tao
  * @since 2020/6/22
  */

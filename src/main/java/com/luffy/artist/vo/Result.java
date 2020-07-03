@@ -2,6 +2,7 @@ package com.luffy.artist.vo;
 
 /**
  * 返回值对象
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */

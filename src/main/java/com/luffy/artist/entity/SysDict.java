@@ -6,56 +6,48 @@ import java.util.Date;
 /**
  * 数据字典
  * 系统字典配置表
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */
 public class SysDict implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * ID主键
      */
     private Integer id;
-
     /**
      * 类型键
      */
     private String typeKey;
-
     /**
      * 类型描述
      */
     private String typeDesc;
-
     /**
      * 子类型名称
      */
     private String subtypeName;
-
     /**
      * 子类型值
      */
     private String subtypeValue;
-
     /**
      * 排序
      */
     private Byte sort;
-
     /**
      * 备注
      */
     private String remark;
-
     /**
      * 更新时间
      */
     private Date updateDate;
-
     /**
      * 创建时间
      */
     private Date createDate;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

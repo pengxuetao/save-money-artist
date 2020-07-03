@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * 我的控制类
+ *
  * @author Peng xue-tao
  * @since 2020/6/17
  */
@@ -40,6 +41,7 @@ public class ProfileController {
 
     /**
      * 查询签名开关设置
+     *
      * @return Result<SysDict>
      */
     @GetMapping("/signature/switch")
@@ -59,6 +61,7 @@ public class ProfileController {
 
     /**
      * 设置签名开关
+     *
      * @return Result<SysDict>
      */
     @PutMapping("/signature/switch")
@@ -92,7 +95,8 @@ public class ProfileController {
 
     /**
      * 查询用户签名列表
-     * @return Result<List<UserSignature>>
+     *
+     * @return Result<List < UserSignature>>
      */
     @GetMapping("/signature/list")
     @ApiOperation(value = "查询用户签名列表")
@@ -105,6 +109,7 @@ public class ProfileController {
 
     /**
      * 查询用户签名
+     *
      * @param id ID主键
      * @return Result<UserSignature>
      */
@@ -123,6 +128,7 @@ public class ProfileController {
 
     /**
      * 增加用户签名
+     *
      * @param addUserSignatureReq 用户签名
      * @return int
      */
@@ -140,6 +146,7 @@ public class ProfileController {
 
     /**
      * 修改用户签名
+     *
      * @param modifyUserSignatureReq 用户签名
      * @return int
      */
@@ -161,6 +168,7 @@ public class ProfileController {
 
     /**
      * 删除用户签名
+     *
      * @param id ID主键
      * @return int
      */
@@ -179,6 +187,7 @@ public class ProfileController {
 
     /**
      * 设置默认用户签名
+     *
      * @param id ID主键
      * @return int
      */
