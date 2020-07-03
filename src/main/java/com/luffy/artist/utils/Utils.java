@@ -9,9 +9,12 @@ import java.util.UUID;
  */
 public class Utils {
 
+    private Utils() {
+    }
+
     /**
      * 获取UUID
-     * @return
+     * @return String
      */
     public static String generateUUID(){
         String uuid = UUID.randomUUID().toString();
@@ -22,7 +25,7 @@ public class Utils {
     /**
      * 获取随机文件名
      * @param fileName 文件名
-     * @return
+     * @return String
      */
     public static String getRandomFileName(String fileName){
         String uuid = UUID.randomUUID().toString();
@@ -31,16 +34,4 @@ public class Utils {
         return uuid+"."+arr[arr.length-1];
     }
 
-    public static void main(String[] args) {
-        System.out.println(Utils.generateUUID());
-        System.out.println(Utils.getRandomFileName("124154.123.5.jpg"));
-
-        String[] arr = {"1","2","3"};
-        StringBuilder condition = new StringBuilder();
-        for(String str: arr) {
-            condition.append(str).append("','");
-        }
-        System.out.println(condition.toString());
-        System.out.println(condition.toString().substring(0,condition.toString().length()-3));
-    }
 }

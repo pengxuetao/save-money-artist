@@ -68,13 +68,8 @@ public class TaoPasswordController {
             LOGGER.info("---转换口令end---");
             return new Result<>(ErrorCode.ERROR_90001.getCode(), ErrorCode.ERROR_90001.getErrorDesc());
         }
-        LOGGER.info("转换前--------------");
-        LOGGER.info(content);
-        LOGGER.info(content2);
         String s = matcher.group();
         String s2 = matcher2.group();
-        LOGGER.info("转换后--------------");
-        LOGGER.info(content.replace(s ,s2));
         String result = content.replace(s ,s2);
         SysDict sysDict = sysDictService.querySysDictByTypeKey("signatureSwitch");
         // 签名设置打开，且有默认签名，则把签名拼接到转换后的口令结果上

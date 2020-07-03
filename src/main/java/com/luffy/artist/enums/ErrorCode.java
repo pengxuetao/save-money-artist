@@ -26,24 +26,17 @@ public enum ErrorCode {
      */
     private String errorDesc;
 
-    public String getCode() {
-        return code;
-    }
-
     ErrorCode(String code, String errorDesc) {
         this.code = code;
         this.errorDesc = errorDesc;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getCode() {
+        return code;
     }
 
     public String getErrorDesc() {
         return errorDesc;
     }
 
-    public void setErrorDesc(String errorDesc) {
-        this.errorDesc = errorDesc;
-    }
 }
