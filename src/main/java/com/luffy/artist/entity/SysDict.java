@@ -1,7 +1,7 @@
 package com.luffy.artist.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 数据字典
@@ -43,11 +43,11 @@ public class SysDict implements Serializable {
     /**
      * 更新时间
      */
-    private Date updateDate;
+    private LocalDateTime updateDate;
     /**
      * 创建时间
      */
-    private Date createDate;
+    private LocalDateTime createDate;
 
     public Integer getId() {
         return id;
@@ -105,19 +105,19 @@ public class SysDict implements Serializable {
         this.remark = remark;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
