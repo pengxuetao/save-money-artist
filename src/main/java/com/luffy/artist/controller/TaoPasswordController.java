@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,8 @@ public class TaoPasswordController {
     private SysDictService sysDictService;
     @Resource
     private UserSignatureService userSignatureService;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 转换口令
@@ -52,6 +55,16 @@ public class TaoPasswordController {
     @ApiOperation(value = "转换口令")
     public Result<ConvertResp> convert(@RequestBody @Valid ConvertReq convertReq) {
         LOGGER.info("---转换口令start---");
+        // 记录转换口令使用次数
+        if (redisTemplate == null) {
+            return new Result<>(ErrorCode.ERROR_10001.getCode(), ErrorCode.ERROR_10001.getErrorDesc());
+        }
+        if (redisTemplate.hasKey("convertCount")) {
+            redisTemplate.opsForValue().increment("convertCount");
+        } else {
+            redisTemplate.opsForValue().set("convertCount", 1);
+        }
+
         String patternExpression;
         if (convertReq.getOriString().contains(SymbolEnum.LEFT_PARENTHESIS.getCode())
                 && convertReq.getOriString().contains(SymbolEnum.RIGHT_PARENTHESIS.getCode())) {
