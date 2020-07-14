@@ -1,4 +1,4 @@
-package com.luffy.artist.controller;
+package com.luffy.artist.controller.taobao;
 
 import com.luffy.artist.entity.SysDict;
 import com.luffy.artist.entity.UserSignature;
