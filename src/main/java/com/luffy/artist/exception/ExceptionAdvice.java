@@ -20,6 +20,6 @@ public class ExceptionAdvice {
         // 从异常对象中拿到ObjectError对象
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         // 然后提取错误提示信息进行返回
-        return new Result<>(ErrorCode.ERROR_10000.getCode(), objectError.getDefaultMessage(), ErrorCode.ERROR_10000.getErrorDesc());
+        return new Result<>(ErrorCode.ERROR_10000.getCode(), objectError.getDefaultMessage());
     }
 }
